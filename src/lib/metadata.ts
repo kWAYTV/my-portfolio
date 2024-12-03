@@ -28,4 +28,4 @@ export const baseUrl =
     : new URL(`https://${process.env.VERCEL_URL!}`);
 
 export const githubProfileUrl = 'https://github.com/kWAYTV';
-export const githubRepoUrl = 'https://github.com/kWAYTV/portfolio';
+export const githubRepoUrl = 'https://github.com/kWAYTV/my-portfolio';
