@@ -1,7 +1,17 @@
+'use client';
+
 import { ArrowUpRight } from 'lucide-react';
+import { useState, useLayoutEffect } from 'react';
 
 import { githubRepoUrl } from '@/lib/metadata';
+
 export default function Footer() {
+  const [year, setYear] = useState<number | null>(null);
+
+  useLayoutEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className='mb-16'>
       <ul className='font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 dark:text-neutral-300 md:flex-row md:space-x-4 md:space-y-0'>
@@ -29,7 +39,7 @@ export default function Footer() {
         </li>
       </ul>
       <p className='mt-8 text-neutral-600 dark:text-neutral-300'>
-        © {new Date().getFullYear()} MIT Licensed
+        © {year} MIT Licensed
       </p>
     </footer>
   );
