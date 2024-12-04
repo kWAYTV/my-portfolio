@@ -1,10 +1,5 @@
 import { BlogPosts } from '@/components/core/blog/posts';
 
-export const metadata = {
-  title: 'Blog',
-  description: 'Read my blog.'
-};
-
 export default function BlogPage() {
   return (
     <section>
@@ -13,3 +8,8 @@ export default function BlogPage() {
     </section>
   );
 }
+
+export const metadata = {
+  title: 'Blog',
+  description: 'Read my blog.'
+};
