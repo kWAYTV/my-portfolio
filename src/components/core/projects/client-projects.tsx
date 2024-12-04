@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import type { Repository } from '@/interfaces/github';
 
+import { RepositoryCardSkeleton } from './repository-card-skeleton';
+
 interface ClientProjectsProps {
   initialRepos: Repository[];
 }
@@ -18,6 +20,7 @@ export function ClientProjects({ initialRepos }: ClientProjectsProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredRepos, setFilteredRepos] = useState(initialRepos);
   const itemsPerPage = 5;
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const filtered = initialRepos.filter(
@@ -35,11 +38,15 @@ export function ClientProjects({ initialRepos }: ClientProjectsProps) {
   const currentRepos = filteredRepos.slice(startIndex, endIndex);
 
   const handlePrevPage = () => {
+    setIsLoading(true);
     setCurrentPage(Math.max(1, currentPage - 1));
+    setIsLoading(false);
   };
 
   const handleNextPage = () => {
+    setIsLoading(true);
     setCurrentPage(Math.min(totalPages, currentPage + 1));
+    setIsLoading(false);
   };
 
   const handleSearch = (term: string) => {
@@ -50,12 +57,19 @@ export function ClientProjects({ initialRepos }: ClientProjectsProps) {
     <div>
       <SearchInput onSearch={handleSearch} />
       <div className='my-8'>
-        {currentRepos.map(repo => (
-          <div key={repo.id}>
-            <RepositoryCard repository={repo} />
-            <Separator className='my-2' />
-          </div>
-        ))}
+        {isLoading
+          ? Array.from({ length: itemsPerPage }).map((_, i) => (
+              <div key={i}>
+                <RepositoryCardSkeleton />
+                <Separator className='my-2' />
+              </div>
+            ))
+          : currentRepos.map(repo => (
+              <div key={repo.id}>
+                <RepositoryCard repository={repo} />
+                <Separator className='my-2' />
+              </div>
+            ))}
       </div>
       {totalPages > 1 && (
         <div className='mt-4 flex items-center justify-center space-x-2 text-sm text-neutral-600 dark:text-neutral-400'>
