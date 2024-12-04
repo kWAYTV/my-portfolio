@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint --fix",
     "format": "prettier --write .",
-    "bump": "bumpp",
-    "ld": "pnpm lint && pnpm dev"
+    "b": "pnpm lint && bumpp",
+    "d": "pnpm lint && pnpm dev"
   },
   "dependencies": {
     "@octokit/rest": "^21.0.2",
