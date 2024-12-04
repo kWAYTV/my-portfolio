@@ -36,6 +36,12 @@ A modern, fast, and responsive portfolio built with cutting-edge technologies.
 - 🔒 Type-safe environment variables with T3 Env
 - 🎯 Proper error handling and loading states
 
+## Inspiration
+
+This portfolio is a complete rewrite inspired by Vercel's minimalist design
+approach. While it shares the clean aesthetics, the codebase has been built from
+the ground up with custom implementations and additional features.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file
