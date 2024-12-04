@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote-client/rsc';
 import { Link } from 'next-view-transitions';
 import { createElement } from 'react';
 import { highlight } from 'sugar-high';
 
-function Table({ data }) {
+function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   const headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
   ));
@@ -26,7 +27,7 @@ function Table({ data }) {
   );
 }
 
-function CustomLink(props) {
+function CustomLink(props: any) {
   const href = props.href;
 
   if (href.startsWith('/')) {
@@ -44,16 +45,16 @@ function CustomLink(props) {
   return <a target='_blank' rel='noopener noreferrer' {...props} />;
 }
 
-function RoundedImage(props) {
+function RoundedImage(props: any) {
   return <Image alt={props.alt} className='rounded-lg' {...props} />;
 }
 
-function Code({ children, ...props }) {
+function Code({ children, ...props }: { children: string; props: any }) {
   const codeHTML = highlight(children);
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
-function slugify(str) {
+function slugify(str: string) {
   return str
     .toString()
     .toLowerCase()
@@ -64,8 +65,8 @@ function slugify(str) {
     .replace(/\-\-+/g, '-'); // Replace multiple - with single -
 }
 
-function createHeading(level) {
-  const Heading = ({ children }) => {
+function createHeading(level: number) {
+  const Heading = ({ children }: { children: string }) => {
     const slug = slugify(children);
     return createElement(
       `h${level}`,
@@ -99,7 +100,7 @@ const components = {
   Table
 };
 
-export function CustomMDX(props) {
+export function CustomMDX(props: any) {
   return (
     <MDXRemote
       {...props}
