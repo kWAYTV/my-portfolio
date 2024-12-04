@@ -8,12 +8,14 @@
     "start": "next start",
     "lint": "next lint --fix",
     "format": "prettier --write .",
-    "bump": "bumpp"
+    "bump": "bumpp",
+    "ld": "pnpm lint && pnpm dev"
   },
   "dependencies": {
     "@octokit/rest": "^21.0.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.4",
     "@t3-oss/env-nextjs": "^0.11.1",
     "bumpp": "^9.8.1",
     "class-variance-authority": "^0.7.1",
