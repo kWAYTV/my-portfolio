@@ -1,25 +1,15 @@
 'use server';
 
 import { Octokit } from '@octokit/rest';
-import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 import { env } from '@/env';
 import type { Repository } from '@/interfaces/github';
 
 export async function fetchGithubRepos() {
-  'use cache';
-
-  cacheLife('hours');
-
   try {
     const octokit = new Octokit({
       auth: env.GITHUB_TOKEN
     });
-
-    // Add artificial delay in development to test loading state
-    if (process.env.NODE_ENV === 'development') {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
 
     const response = await octokit.repos.listForUser({
       username: 'kWAYTV',
