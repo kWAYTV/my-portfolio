@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { RepositoryCard } from '@/components/core/projects/repository-card';
 import { SearchInput } from '@/components/core/projects/search-input';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import type { Repository } from '@/interfaces/github';
 
 interface ClientProjectsProps {
@@ -50,7 +51,10 @@ export function ClientProjects({ initialRepos }: ClientProjectsProps) {
       <SearchInput onSearch={handleSearch} />
       <div className='my-8'>
         {currentRepos.map(repo => (
-          <RepositoryCard key={repo.id} repository={repo} />
+          <div key={repo.id}>
+            <RepositoryCard repository={repo} />
+            <Separator className='my-2' />
+          </div>
         ))}
       </div>
       {totalPages > 1 && (
