@@ -7,57 +7,37 @@ import type { Repository } from '@/interfaces/github';
 
 export async function fetchGithubRepos() {
   try {
-    if (!env.GITHUB_TOKEN) {
-      throw new Error('GITHUB_TOKEN is required');
-    }
-
     const octokit = new Octokit({
       auth: env.GITHUB_TOKEN
     });
 
-    let allRepos: Repository[] = [];
-    let page = 1;
+    // Add artificial delay in development to test loading state
+    if (process.env.NODE_ENV === 'development') {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
 
-    while (true) {
-      // Fetch repositories page by page
-      const response = await octokit.repos.listForAuthenticatedUser({
-        sort: 'updated',
-        per_page: 100,
-        page,
-        affiliation: 'owner',
-        visibility: 'public'
-      });
+    const response = await octokit.repos.listForUser({
+      username: 'kWAYTV',
+      sort: 'updated',
+      per_page: 100
+    });
 
-      const repos = response.data;
-
-      // If no more repos are returned, break the loop
-      if (repos.length === 0) break;
-
-      // Format and add repositories to our collection
-      const formattedRepos: Repository[] = repos.map(repo => ({
+    const allRepos = response.data
+      .filter(repo => !repo.fork && !repo.private)
+      .map(repo => ({
         id: repo.id,
         name: repo.name,
         full_name: repo.full_name,
-        description: repo.description ?? null,
+        description: repo.description,
         html_url: repo.html_url,
-        private: repo.private ?? false,
-        fork: repo.fork ?? false,
-        created_at: repo.created_at ?? null,
-        updated_at: repo.updated_at ?? null,
-        language: repo.language ?? null,
-        stargazers_count: repo.stargazers_count ?? 0,
-        forks_count: repo.forks_count ?? 0,
-        organization: undefined
-      }));
-
-      allRepos = [...allRepos, ...formattedRepos];
-
-      // If we received fewer repos than requested, we've hit the end
-      if (repos.length < 100) break;
-
-      // Move to next page
-      page++;
-    }
+        private: repo.private,
+        fork: repo.fork,
+        created_at: repo.created_at,
+        updated_at: repo.updated_at,
+        language: repo.language,
+        stargazers_count: repo.stargazers_count,
+        forks_count: repo.forks_count
+      })) as Repository[];
 
     // Sort all repositories by update date
     const sortedRepos = allRepos.sort((a, b) => {
