@@ -1,4 +1,4 @@
-import { baseUrl } from '@/lib/metadata';
+import { baseUrl } from '@/app/sitemap';
 
 export default function robots() {
   return {

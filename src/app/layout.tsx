@@ -3,11 +3,11 @@ import './globals.css';
 import localFont from 'next/font/local';
 import { ViewTransitions } from 'next-view-transitions';
 
+import { baseUrl } from '@/app/sitemap';
 import Footer from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/nav';
 import { Providers } from '@/components/providers';
 import { createMetadata } from '@/lib/metadata';
-import { baseUrl } from '@/lib/metadata';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -46,9 +46,9 @@ export default function RootLayout({
 
 export const metadata = createMetadata({
   title: {
-    template: '%s | perc.dev',
-    default: 'perc.dev'
+    default: 'perc.dev',
+    template: '%s | perc.dev'
   },
   description: 'Welcome to my portfolio!',
-  metadataBase: baseUrl
+  metadataBase: new URL(baseUrl)
 });
