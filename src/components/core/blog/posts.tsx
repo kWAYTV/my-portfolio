@@ -19,7 +19,7 @@ export function BlogPosts() {
         .map(post => (
           <Link
             key={post.slug}
-            className='mb-4 flex flex-col space-y-1'
+            className='mb-4 flex flex-col space-y-1 rounded-md p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900'
             href={`/blog/${post.slug}`}
           >
             <div className='flex w-full flex-row space-x-0 md:space-x-2'>
