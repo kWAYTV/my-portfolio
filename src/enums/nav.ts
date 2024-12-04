@@ -1,25 +1,26 @@
 import { BookOpen, GithubIcon, HomeIcon, MenuIcon } from 'lucide-react';
 
-export const navItems = {
+import type { NavItems } from '@/types/nav';
+
+export const navItems: NavItems = {
   '/': {
     name: 'home',
-    icon: HomeIcon
+    icon: HomeIcon,
+    tooltip: 'Go to the home page'
   },
   '/projects': {
     name: 'projects',
-    icon: MenuIcon
+    icon: MenuIcon,
+    tooltip: 'Dive into my GitHub projects'
   },
   '/blog': {
     name: 'blog',
-    icon: BookOpen
+    icon: BookOpen,
+    tooltip: 'Explore my blog'
   },
   'https://github.com/kWAYTV': {
     name: 'github',
-    icon: GithubIcon
+    icon: GithubIcon,
+    tooltip: 'Take a look at my GitHub profile'
   }
-} as const;
-
-export type NavItem = {
-  name: string;
-  icon: React.ElementType;
-};
+} satisfies NavItems;
