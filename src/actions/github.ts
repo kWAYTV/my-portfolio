@@ -1,11 +1,16 @@
 'use server';
 
 import { Octokit } from '@octokit/rest';
+import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 import { env } from '@/env';
 import type { Repository } from '@/interfaces/github';
 
 export async function fetchGithubRepos() {
+  'use cache';
+
+  cacheLife('hours');
+
   try {
     const octokit = new Octokit({
       auth: env.GITHUB_TOKEN
