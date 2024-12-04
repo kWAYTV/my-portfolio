@@ -1,6 +1,6 @@
 # Portfolio
 
-[![Changelog-Release](https://github.com/kWAYTV/my-portfolio/actions/workflows/cr.yml/badge.svg)](https://github.com/kWAYTV/my-portfolio/actions/workflows/cr.yml)
+[![Changelog-Release](https://github.com/kWAYTV/portfolio/actions/workflows/cr.yml/badge.svg)](https://github.com/kWAYTV/portfolio/actions/workflows/cr.yml)
 
 🚧 **This is a work in progress. For my current portfolio, visit
 [github.com/kWAYTV/portfolio-old](https://github.com/kWAYTV/portfolio-old)** 🚧
