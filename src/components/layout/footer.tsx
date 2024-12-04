@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowUpRight } from 'lucide-react';
-import { useState, useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 import { githubRepoUrl } from '@/lib/metadata';
 
