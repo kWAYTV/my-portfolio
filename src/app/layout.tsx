@@ -46,9 +46,9 @@ export default function RootLayout({
 
 export const metadata = createMetadata({
   title: {
-    template: '%s | banz.club',
-    default: 'Hypixel Ban Statistics'
+    template: '%s | perc.dev',
+    default: 'perc.dev'
   },
-  description: 'Real-time tracking of Hypixel ban statistics',
+  description: 'Welcome to my portfolio!',
   metadataBase: baseUrl
 });
