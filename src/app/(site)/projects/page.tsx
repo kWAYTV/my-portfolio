@@ -9,11 +9,6 @@ export default function ProjectsPage() {
       <h1 className='mb-8 text-2xl font-semibold tracking-tighter'>
         My Projects
       </h1>
-      <p className='mb-4 text-neutral-800 dark:text-neutral-200'>
-        {`A collection of my open source projects, automatically synced with GitHub. 
-        These range from developer tools to personal experiments, showcasing my 
-        journey in software development.`}
-      </p>
       <Suspense fallback={<ProjectsSkeleton />}>
         <Projects />
       </Suspense>
