@@ -10,7 +10,6 @@ export default function ProjectsPage() {
         My Projects
       </h1>
       <Suspense fallback={<ProjectsSkeleton />}>
-        {/* @ts-expect-error Server Component */}
         <Projects />
       </Suspense>
     </section>
