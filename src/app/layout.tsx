@@ -4,9 +4,9 @@ import localFont from 'next/font/local';
 import { ViewTransitions } from 'next-view-transitions';
 
 import { baseUrl } from '@/app/sitemap';
-import Footer from '@/components/layout/footer';
-import { Navbar } from '@/components/layout/nav';
-import { Providers } from '@/components/providers/providers';
+import Footer from '@/components/core/layout/footer';
+import { Navbar } from '@/components/core/layout/nav';
+import { Providers } from '@/components/core/providers/providers';
 import { createMetadata } from '@/lib/metadata';
 
 const geistSans = localFont({

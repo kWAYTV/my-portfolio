@@ -34,7 +34,16 @@ export function Navbar() {
                     className='flex items-center gap-2 p-2'
                     asChild
                   >
-                    <Link href={path} aria-label={`Navigate to ${name}`}>
+                    <Link
+                      href={path}
+                      aria-label={`Navigate to ${name}`}
+                      {...(name.toLowerCase() === 'github'
+                        ? {
+                            target: '_blank',
+                            rel: 'noopener noreferrer'
+                          }
+                        : {})}
+                    >
                       <Icon className='h-4 w-4' aria-hidden='true' />
                       <span className='capitalize'>{name}</span>
                     </Link>
