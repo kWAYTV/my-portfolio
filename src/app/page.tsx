@@ -1,6 +1,7 @@
 import { BlogPosts } from '@/components/core/blog/posts';
 import { Description } from '@/components/core/home/description';
 import { Hero } from '@/components/core/home/hero';
+import { createMetadata } from '@/lib/metadata';
 
 export default function HomePage() {
   return (
@@ -14,7 +15,7 @@ export default function HomePage() {
   );
 }
 
-export const metadata = {
+export const metadata = createMetadata({
   title: 'Home',
   description: 'perc.dev - Homepage'
-};
+});

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 
 import { Projects } from '@/components/core/projects/projects';
 import { ProjectsSkeleton } from '@/components/core/projects/projects-skeleton';
+import { createMetadata } from '@/lib/metadata';
 
 export default function ProjectsPage() {
   return (
@@ -16,7 +17,7 @@ export default function ProjectsPage() {
   );
 }
 
-export const metadata = {
+export const metadata = createMetadata({
   title: 'Projects',
   description: 'Browse my open source projects.'
-};
+});

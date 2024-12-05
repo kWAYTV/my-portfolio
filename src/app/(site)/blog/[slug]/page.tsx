@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { baseUrl } from '@/app/sitemap';
 import { CustomMDX } from '@/components/core/blog/mdx';
 import { formatDate, getBlogPosts } from '@/lib/blog';
+import { createMetadata } from '@/lib/metadata';
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
@@ -17,11 +18,12 @@ export async function generateMetadata(props: {
 }) {
   const params = await props.params;
   const post = getBlogPosts().find(post => post.slug === params.slug);
+
   if (!post) {
-    return {
+    return createMetadata({
       title: 'Blog',
       description: 'Blog'
-    };
+    });
   }
 
   const {
@@ -30,11 +32,12 @@ export async function generateMetadata(props: {
     summary: description,
     image
   } = post.metadata;
+
   const ogImage = image
     ? image
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
 
-  return {
+  return createMetadata({
     title,
     description,
     openGraph: {
@@ -43,11 +46,7 @@ export async function generateMetadata(props: {
       type: 'article',
       publishedTime,
       url: `${baseUrl}/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage
-        }
-      ]
+      images: [{ url: ogImage }]
     },
     twitter: {
       card: 'summary_large_image',
@@ -55,7 +54,7 @@ export async function generateMetadata(props: {
       description,
       images: [ogImage]
     }
-  };
+  });
 }
 
 export default async function Blog(props: {

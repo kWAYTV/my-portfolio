@@ -1,4 +1,5 @@
 import { BlogPosts } from '@/components/core/blog/posts';
+import { createMetadata } from '@/lib/metadata';
 
 export default function BlogPage() {
   return (
@@ -9,7 +10,7 @@ export default function BlogPage() {
   );
 }
 
-export const metadata = {
+export const metadata = createMetadata({
   title: 'Blog',
   description: 'Read my blog.'
-};
+});
