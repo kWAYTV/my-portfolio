@@ -17,6 +17,7 @@ export async function generateMetadata(props: {
 }) {
   const params = await props.params;
   const post = getBlogPosts().find(post => post.slug === params.slug);
+
   if (!post) {
     return {
       title: 'Blog',
