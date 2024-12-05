@@ -9,6 +9,8 @@ export default function Footer() {
         <li>
           <a
             href='/rss'
+            target='_blank'
+            rel='noopener noreferrer'
             className='flex items-center hover:text-neutral-800 dark:hover:text-neutral-100'
           >
             <ArrowUpRight />
@@ -18,6 +20,8 @@ export default function Footer() {
         <li>
           <a
             href={githubRepoUrl}
+            target='_blank'
+            rel='noopener noreferrer'
             className='flex items-center hover:text-neutral-800 dark:hover:text-neutral-100'
           >
             <ArrowUpRight />
