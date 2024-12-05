@@ -3,13 +3,12 @@
   "version": "0.2.8",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "pnpm lint && next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
     "format": "prettier --write .",
-    "b": "pnpm lint && bumpp",
-    "d": "pnpm lint && pnpm dev"
+    "bump": "pnpm lint && bumpp"
   },
   "dependencies": {
     "@octokit/rest": "^21.0.2",
