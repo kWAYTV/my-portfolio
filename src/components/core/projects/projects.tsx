@@ -3,7 +3,10 @@ import { ClientProjects } from '@/components/core/projects/client-projects';
 
 export async function Projects() {
   const result = await fetchGithubRepos();
-  const repos = 'repos' in result && result.repos ? result.repos : [];
 
-  return <ClientProjects initialRepos={repos} />;
+  if ('error' in result) {
+    throw new Error(result.error);
+  }
+
+  return <ClientProjects initialRepos={result.repos} />;
 }
