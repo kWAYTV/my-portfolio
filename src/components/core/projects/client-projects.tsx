@@ -4,12 +4,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { RepositoryCard } from '@/components/core/projects/repository-card';
+import { RepositoryCardSkeleton } from '@/components/core/projects/repository-card-skeleton';
 import { SearchInput } from '@/components/core/projects/search-input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import type { Repository } from '@/interfaces/github';
-
-import { RepositoryCardSkeleton } from './repository-card-skeleton';
 
 interface ClientProjectsProps {
   initialRepos: Repository[];
