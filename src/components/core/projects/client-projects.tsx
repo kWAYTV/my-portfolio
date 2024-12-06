@@ -3,13 +3,17 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect } from 'react';
 
+import { RepositoryCard } from '@/components/core/projects/repository-card';
+import { SearchInput } from '@/components/core/projects/search-input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip';
 import type { Repository } from '@/interfaces/github';
 import { useGitHubStore } from '@/store/github';
-
-import { RepositoryCard } from './repository-card';
-import { SearchInput } from './search-input';
 
 interface ClientProjectsProps {
   initialRepos: Repository[];
@@ -30,7 +34,21 @@ export function ClientProjects({ initialRepos }: ClientProjectsProps) {
 
   return (
     <div>
-      <SearchInput />
+      <div className='flex items-center gap-4'>
+        <div className='flex-1'>
+          <SearchInput />
+        </div>
+        <Tooltip>
+          <TooltipTrigger className='text-sm text-neutral-600 dark:text-neutral-400'>
+            {filteredRepos.length} repos
+          </TooltipTrigger>
+          <TooltipContent>
+            {filteredRepos.length === initialRepos.length
+              ? `Total repositories: ${initialRepos.length}`
+              : `Showing ${filteredRepos.length} of ${initialRepos.length} repositories`}
+          </TooltipContent>
+        </Tooltip>
+      </div>
       <div className='my-8'>
         {currentRepos.map(repo => (
           <div key={repo.id}>
