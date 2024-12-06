@@ -27,5 +27,6 @@ export const baseUrl =
     ? new URL('http://localhost:3000')
     : new URL(`https://${process.env.VERCEL_URL!}`);
 
-export const githubProfileUrl = 'https://github.com/kWAYTV';
-export const githubRepoUrl = 'https://github.com/kWAYTV/portfolio';
+export const githubUsername = 'kWAYTV';
+export const githubProfileUrl = `https://github.com/${githubUsername}`;
+export const githubRepoUrl = `https://github.com/${githubUsername}/portfolio`;

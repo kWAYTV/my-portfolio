@@ -4,6 +4,7 @@ import { Octokit } from '@octokit/rest';
 
 import { env } from '@/env';
 import type { Repository } from '@/interfaces/github';
+import { githubUsername } from '@/lib/metadata';
 
 export async function fetchGithubRepos() {
   try {
@@ -12,7 +13,7 @@ export async function fetchGithubRepos() {
     });
 
     const response = await octokit.repos.listForUser({
-      username: 'kWAYTV',
+      username: githubUsername,
       sort: 'updated',
       per_page: 100
     });
