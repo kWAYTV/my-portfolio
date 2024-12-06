@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 import { Projects } from '@/components/core/projects/projects';
 import { ProjectsSkeleton } from '@/components/core/projects/projects-skeleton';
 
+export const revalidate = 3600;
+
 export default function ProjectsPage() {
   return (
     <section>
