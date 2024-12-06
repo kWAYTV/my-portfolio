@@ -1,7 +1,13 @@
-import { GitFork, Star } from 'lucide-react';
+import { GitFork, LockIcon, Star } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 
+import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip';
 import type { Repository } from '@/interfaces/github';
 
 interface RepositoryCardProps {
@@ -22,14 +28,31 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
           {repository.language || 'Unknown'}
         </div>
         <div className='flex flex-1 justify-between'>
-          <a
-            href={repository.html_url}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='tracking-tight text-neutral-900 dark:text-neutral-100'
-          >
-            {repository.name}
-          </a>
+          <div className='flex items-center gap-2'>
+            <Button
+              variant='link'
+              asChild
+              className='h-auto p-0 text-base font-normal tracking-tight text-neutral-900 hover:bg-transparent hover:text-neutral-700 dark:text-neutral-100 dark:hover:text-neutral-300'
+            >
+              <a
+                href={repository.html_url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {repository.name}
+              </a>
+            </Button>
+            {repository.private && (
+              <Tooltip>
+                <TooltipTrigger>
+                  <LockIcon className='mr-1 h-4 w-4' />
+                </TooltipTrigger>
+                <TooltipContent>
+                  This repository is private and may not be accessible
+                </TooltipContent>
+              </Tooltip>
+            )}
+          </div>
           <div className='flex items-center space-x-4 text-neutral-600 dark:text-neutral-400'>
             <span className='flex items-center'>
               <Star className='mr-1 h-4 w-4' />
