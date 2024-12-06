@@ -18,7 +18,7 @@ export async function fetchGithubRepos() {
     });
 
     const allRepos = response.data
-      .filter(repo => !repo.fork && !repo.private)
+      .filter(repo => !repo.fork)
       .map(repo => ({
         id: repo.id,
         name: repo.name,
