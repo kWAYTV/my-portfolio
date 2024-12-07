@@ -6,7 +6,7 @@ import { fetchGithubRepos } from '@/actions/github';
 export function useGithubRepos() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 5;
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['github-repos'],
