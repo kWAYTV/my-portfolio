@@ -15,7 +15,7 @@ interface RepositoryCardProps {
 
 export function RepositoryCard({ repository }: RepositoryCardProps) {
   return (
-    <div className='group mb-4 rounded-md p-4 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900'>
+    <div className='group rounded-md p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900'>
       <div className='flex w-full flex-col space-y-2'>
         <div className='flex items-start justify-between'>
           <div className='flex items-center gap-2'>

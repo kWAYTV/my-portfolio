@@ -45,19 +45,25 @@ export function ClientProjects() {
         value={searchTerm}
         onValueChange={handleSearchChange}
       />
-      <div className='space-y-4'>
+      <div>
         {isLoading
           ? Array.from({ length: itemsPerPage }).map((_, index) => (
-              <RepositoryCardSkeleton key={index} />
+              <div key={index}>
+                <RepositoryCardSkeleton />
+                {index < itemsPerPage - 1 && <Separator className='my-1' />}
+              </div>
             ))
-          : repos.map(repo => (
-              <RepositoryCard key={repo.id} repository={repo} />
+          : repos.map((repo, index) => (
+              <div key={repo.id}>
+                <RepositoryCard repository={repo} />
+                {index < repos.length - 1 && <Separator className='my-1' />}
+              </div>
             ))}
       </div>
 
       {totalRepos > itemsPerPage && (
         <>
-          <Separator />
+          <Separator className='my-2' />
           <div className='flex items-center justify-between'>
             <Tooltip>
               <TooltipTrigger asChild>
