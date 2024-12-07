@@ -12,7 +12,7 @@ A modern, fast, and responsive portfolio built with cutting-edge technologies.
 - **UI Components**: Custom components with
   [shadcn/ui](https://www.radix-ui.com/)
 - **Content**: [MDX](https://mdxjs.com/) for blog posts
-- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Query Client** [Tanstack Query](https://tanstack.com/query/)
 - **Animations**: [Motion](https://motion.dev/)
 - **Icons**: [Lucide](https://lucide.dev/)
 - **Development**:

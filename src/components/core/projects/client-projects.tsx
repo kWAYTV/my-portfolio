@@ -1,9 +1,9 @@
 'use client';
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useEffect } from 'react';
 
 import { RepositoryCard } from '@/components/core/projects/repository-card';
+import { RepositoryCardSkeleton } from '@/components/core/projects/repository-card-skeleton';
 import { SearchInput } from '@/components/core/projects/search-input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -12,77 +12,86 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip';
-import type { Repository } from '@/interfaces/github';
-import { useGitHubStore } from '@/store/github';
+import { useGithubRepos } from '@/hooks/use-github-repos';
 
-interface ClientProjectsProps {
-  initialRepos: Repository[];
-}
+export function ClientProjects() {
+  const {
+    repos,
+    totalRepos,
+    isLoading,
+    error,
+    searchTerm,
+    setSearchTerm,
+    currentPage,
+    setCurrentPage,
+    itemsPerPage
+  } = useGithubRepos();
 
-export function ClientProjects({ initialRepos }: ClientProjectsProps) {
-  const { filteredRepos, currentPage, itemsPerPage, setRepos, setCurrentPage } =
-    useGitHubStore();
+  const totalPages = Math.ceil(totalRepos / itemsPerPage);
 
-  useEffect(() => {
-    setRepos(initialRepos);
-  }, [initialRepos, setRepos]);
+  if (error) {
+    return <div>Error loading repositories: {error.message}</div>;
+  }
 
-  const totalPages = Math.ceil(filteredRepos.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentRepos = filteredRepos.slice(startIndex, endIndex);
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value);
+    setCurrentPage(1);
+  };
 
   return (
-    <div>
-      <div className='flex items-center gap-4'>
-        <div className='flex-1'>
-          <SearchInput />
-        </div>
-        <Tooltip>
-          <TooltipTrigger className='text-sm text-neutral-600 dark:text-neutral-400'>
-            {filteredRepos.length} repos
-          </TooltipTrigger>
-          <TooltipContent>
-            {filteredRepos.length === initialRepos.length
-              ? `Total repositories: ${initialRepos.length}`
-              : `Showing ${filteredRepos.length} of ${initialRepos.length} repositories`}
-          </TooltipContent>
-        </Tooltip>
+    <div className='space-y-4'>
+      <SearchInput
+        name='search'
+        value={searchTerm}
+        onValueChange={handleSearchChange}
+      />
+      <div className='space-y-4'>
+        {isLoading
+          ? Array.from({ length: itemsPerPage }).map((_, index) => (
+              <RepositoryCardSkeleton key={index} />
+            ))
+          : repos.map(repo => (
+              <RepositoryCard key={repo.id} repository={repo} />
+            ))}
       </div>
-      <div className='my-8'>
-        {currentRepos.map(repo => (
-          <div key={repo.id}>
-            <RepositoryCard repository={repo} />
-            <Separator className='my-2' />
+
+      {totalRepos > itemsPerPage && (
+        <>
+          <Separator />
+          <div className='flex items-center justify-between'>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant='ghost'
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                >
+                  <ChevronLeft className='h-4 w-4' />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Previous page</TooltipContent>
+            </Tooltip>
+
+            <span className='text-sm text-muted-foreground'>
+              Page {currentPage} of {totalPages}
+            </span>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant='ghost'
+                  onClick={() =>
+                    setCurrentPage(p => Math.min(totalPages, p + 1))
+                  }
+                  disabled={currentPage === totalPages}
+                >
+                  <ChevronRight className='h-4 w-4' />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Next page</TooltipContent>
+            </Tooltip>
           </div>
-        ))}
-      </div>
-      {totalPages > 1 && (
-        <div className='mt-4 flex items-center justify-center space-x-2 text-sm text-neutral-600 dark:text-neutral-400'>
-          <Button
-            variant='ghost'
-            size='icon'
-            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-            disabled={currentPage === 1}
-            className='h-7 w-7'
-          >
-            <ChevronLeft className='h-4 w-4' />
-          </Button>
-          <span className='tabular-nums'>
-            {currentPage} / {totalPages}
-          </span>
-          <Button
-            variant='ghost'
-            size='icon'
-            onClick={() =>
-              setCurrentPage(Math.min(totalPages, currentPage + 1))
-            }
-            disabled={currentPage === totalPages}
-            className='h-7 w-7'
-          >
-            <ChevronRight className='h-4 w-4' />
-          </Button>
-        </div>
+        </>
       )}
     </div>
   );
