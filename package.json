@@ -28,7 +28,7 @@
     "next-view-transitions": "^0.3.4",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "sonner": "^1.7.0",
+    "sonner": "^1.7.1",
     "sugar-high": "^0.7.5",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
