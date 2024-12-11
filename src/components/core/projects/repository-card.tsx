@@ -18,7 +18,7 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
   return (
     <div className='group rounded-md p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900'>
       <div className='flex w-full flex-col space-y-2'>
-        <div className='flex items-start justify-between'>
+        <div className='flex flex-col space-y-2 sm:flex-row sm:items-start sm:justify-between'>
           <div className='flex items-center gap-2'>
             <Button
               variant='link'
@@ -45,7 +45,7 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
           <div className='flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400'>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className='tabular-nums transition-colors hover:text-neutral-900 dark:hover:text-neutral-100'>
+                <span className='hidden tabular-nums transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 sm:inline'>
                   {repository.updated_at && formatDate(repository.updated_at)}
                 </span>
               </TooltipTrigger>
@@ -74,13 +74,18 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
           </div>
         </div>
 
-        <div className='flex items-center gap-x-4 text-sm'>
-          <Badge
-            variant='outline'
-            className='bg-neutral-50 dark:bg-neutral-900'
-          >
-            {repository.language || 'Unknown'}
-          </Badge>
+        <div className='flex flex-col gap-2 text-sm sm:flex-row sm:items-center sm:gap-x-4'>
+          <div className='flex items-center gap-2'>
+            <Badge
+              variant='outline'
+              className='bg-neutral-50 dark:bg-neutral-900'
+            >
+              {repository.language || 'Unknown'}
+            </Badge>
+            <span className='text-xs text-neutral-600 dark:text-neutral-400 sm:hidden'>
+              {repository.updated_at && formatDate(repository.updated_at)}
+            </span>
+          </div>
           {repository.description && (
             <Tooltip>
               <TooltipTrigger asChild>
