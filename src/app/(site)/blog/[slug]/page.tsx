@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 
 import { baseUrl } from '@/app/sitemap';
 import { CustomMDX } from '@/components/core/blog/mdx';
-import { formatDate, getBlogPosts } from '@/lib/blog';
+import { getBlogPosts } from '@/lib/blog';
+import { formatDate } from '@/lib/utils';
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();

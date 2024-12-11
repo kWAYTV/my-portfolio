@@ -1,7 +1,8 @@
 import { Link } from 'next-view-transitions';
 
 import { Separator } from '@/components/ui/separator';
-import { formatDate, getBlogPosts } from '@/lib/blog';
+import { getBlogPosts } from '@/lib/blog';
+import { formatDate } from '@/lib/utils';
 
 export function BlogPosts() {
   const allBlogs = getBlogPosts();
