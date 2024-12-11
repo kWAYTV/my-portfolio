@@ -8,6 +8,7 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip';
 import type { Repository } from '@/interfaces/github';
+import { formatDate } from '@/lib/utils';
 
 interface RepositoryCardProps {
   repository: Repository;
@@ -42,14 +43,34 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
             )}
           </div>
           <div className='flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400'>
-            <span className='flex items-center gap-1'>
-              <Star className='h-4 w-4' />
-              {repository.stargazers_count}
-            </span>
-            <span className='flex items-center gap-1'>
-              <GitFork className='h-4 w-4' />
-              {repository.forks_count}
-            </span>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className='tabular-nums transition-colors hover:text-neutral-900 dark:hover:text-neutral-100'>
+                  {repository.updated_at && formatDate(repository.updated_at)}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>Last updated</TooltipContent>
+            </Tooltip>
+            <div className='flex items-center gap-2'>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className='flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100'>
+                    <Star className='h-4 w-4' />
+                    <span>{repository.stargazers_count}</span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>Stars</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className='flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100'>
+                    <GitFork className='h-4 w-4' />
+                    <span>{repository.forks_count}</span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>Forks</TooltipContent>
+              </Tooltip>
+            </div>
           </div>
         </div>
 
