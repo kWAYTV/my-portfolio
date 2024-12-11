@@ -2,13 +2,9 @@
 
 import { Link } from 'next-view-transitions';
 
+import { AnimatedTooltip } from '@/components/motion/tooltip';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/ui/mode-toggle';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/ui/tooltip';
 import { navItems } from '@/enums/nav';
 import type { NavPath } from '@/types/nav';
 
@@ -27,30 +23,32 @@ export function Navbar() {
                 (typeof navItems)[NavPath]
               ][]
             ).map(([path, { name, icon: Icon, tooltip }]) => (
-              <Tooltip key={path}>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant='linkHover2'
-                    className='flex items-center gap-2 p-2'
-                    asChild
+              <AnimatedTooltip
+                key={path}
+                content={{
+                  description: tooltip
+                }}
+              >
+                <Button
+                  variant='linkHover2'
+                  className='flex items-center gap-2 p-2'
+                  asChild
+                >
+                  <Link
+                    href={path}
+                    aria-label={`Navigate to ${name}`}
+                    {...(name.toLowerCase() === 'github'
+                      ? {
+                          target: '_blank',
+                          rel: 'noopener noreferrer'
+                        }
+                      : {})}
                   >
-                    <Link
-                      href={path}
-                      aria-label={`Navigate to ${name}`}
-                      {...(name.toLowerCase() === 'github'
-                        ? {
-                            target: '_blank',
-                            rel: 'noopener noreferrer'
-                          }
-                        : {})}
-                    >
-                      <Icon className='h-4 w-4' aria-hidden='true' />
-                      <span className='capitalize'>{name}</span>
-                    </Link>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>{tooltip}</TooltipContent>
-              </Tooltip>
+                    <Icon className='h-4 w-4' aria-hidden='true' />
+                    <span className='capitalize'>{name}</span>
+                  </Link>
+                </Button>
+              </AnimatedTooltip>
             ))}
             <ModeToggle />
           </div>

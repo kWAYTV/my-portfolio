@@ -1,12 +1,8 @@
 import { GitFork, LockIcon, Star } from 'lucide-react';
 
+import { AnimatedTooltip } from '@/components/motion/tooltip';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/ui/tooltip';
 import type { Repository } from '@/interfaces/github';
 
 interface RepositoryCardProps {
@@ -33,12 +29,9 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
               </a>
             </Button>
             {repository.private && (
-              <Tooltip>
-                <TooltipTrigger>
-                  <LockIcon className='h-4 w-4 text-neutral-500' />
-                </TooltipTrigger>
-                <TooltipContent>Private repository</TooltipContent>
-              </Tooltip>
+              <AnimatedTooltip content={{ description: 'Private repository' }}>
+                <LockIcon className='h-4 w-4 text-neutral-500' />
+              </AnimatedTooltip>
             )}
           </div>
           <div className='flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400'>
@@ -61,16 +54,11 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
             {repository.language || 'Unknown'}
           </Badge>
           {repository.description && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className='line-clamp-1 cursor-default text-neutral-600 dark:text-neutral-400'>
-                  {repository.description}
-                </span>
-              </TooltipTrigger>
-              <TooltipContent side='bottom' className='max-w-[300px]'>
+            <AnimatedTooltip content={{ description: repository.description }}>
+              <span className='line-clamp-1 cursor-default text-neutral-600 dark:text-neutral-400'>
                 {repository.description}
-              </TooltipContent>
-            </Tooltip>
+              </span>
+            </AnimatedTooltip>
           )}
         </div>
       </div>
