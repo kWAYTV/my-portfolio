@@ -22,13 +22,13 @@ export const AnimatedTooltip = ({ content, children }: TooltipProps) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 15, stiffness: 300 };
+  const springConfig = { damping: 25, stiffness: 200 };
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
 
-  const rotate = useTransform(x, [-100, 100], [-10, 10]);
-  const translateX = useTransform(x, [-100, 100], [-5, 5]);
-  const translateY = useTransform(y, [-100, 100], [-5, 5]);
+  const rotate = useTransform(x, [-100, 100], [-5, 5]);
+  const translateX = useTransform(x, [-100, 100], [-3, 3]);
+  const translateY = useTransform(y, [-100, 100], [-3, 3]);
 
   const handleMouseMove = (event: React.MouseEvent) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -57,26 +57,28 @@ export const AnimatedTooltip = ({ content, children }: TooltipProps) => {
               asChild
             >
               <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                exit={{ opacity: 0, scale: 0.98 }}
                 style={{
                   translateX,
                   translateY,
                   rotate
                 }}
                 transition={{
-                  duration: 0.15,
-                  ease: 'easeOut'
+                  duration: 0.2,
+                  ease: [0.4, 0, 0.2, 1]
                 }}
                 className='relative'
               >
-                <div className='rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground shadow-xl'>
+                <div className='rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground shadow-xl'>
                   {content.title && (
-                    <div className='font-medium'>{content.title}</div>
+                    <div className='font-semibold leading-tight'>
+                      {content.title}
+                    </div>
                   )}
                   {content.description && (
-                    <div className='text-xs opacity-90'>
+                    <div className='text-[13px] leading-snug opacity-95'>
                       {content.description}
                     </div>
                   )}
