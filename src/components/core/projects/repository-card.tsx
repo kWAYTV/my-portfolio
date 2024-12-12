@@ -1,4 +1,5 @@
-import { GitFork, LockIcon, Star } from 'lucide-react';
+import { GitFork, LinkIcon, LockIcon, Star } from 'lucide-react';
+import { Link } from 'next-view-transitions';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -25,13 +26,15 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
               asChild
               className='h-auto p-0 text-base font-medium tracking-tight text-neutral-900 hover:bg-transparent hover:text-neutral-700 dark:text-neutral-100 dark:hover:text-neutral-300'
             >
-              <a
+              <Link
                 href={repository.html_url}
                 target='_blank'
                 rel='noopener noreferrer'
+                className='flex items-center gap-1'
               >
+                <LinkIcon className='h-4 w-4' />
                 {repository.name}
-              </a>
+              </Link>
             </Button>
             {repository.private && (
               <Tooltip>
