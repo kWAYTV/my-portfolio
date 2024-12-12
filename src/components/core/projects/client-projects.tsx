@@ -64,11 +64,13 @@ export function ClientProjects() {
       {totalRepos > itemsPerPage && (
         <>
           <Separator className='my-2' />
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center justify-between px-1'>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   variant='ghost'
+                  size='sm'
+                  className='h-8 w-8 p-0'
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
                 >
@@ -79,13 +81,15 @@ export function ClientProjects() {
             </Tooltip>
 
             <span className='text-sm text-muted-foreground'>
-              Page {currentPage} of {totalPages}
+              {currentPage} / {totalPages}
             </span>
 
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   variant='ghost'
+                  size='sm'
+                  className='h-8 w-8 p-0'
                   onClick={() =>
                     setCurrentPage(p => Math.min(totalPages, p + 1))
                   }
