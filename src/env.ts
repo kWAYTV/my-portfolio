@@ -7,14 +7,17 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
-    GITHUB_TOKEN: z.string()
+    GITHUB_TOKEN: z.string(),
+    UMAMI_WEBSITE_ID: z.string()
   },
   /*
    * Environment variables available on the client (and server).
    *
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
-  client: {},
+  client: {
+    NEXT_PUBLIC_ENABLE_UMAMI: z.string().default('false')
+  },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
    * we need to manually destructure them to make sure all are included in bundle.
@@ -22,6 +25,8 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+    NEXT_PUBLIC_ENABLE_UMAMI: process.env.NEXT_PUBLIC_ENABLE_UMAMI,
+    UMAMI_WEBSITE_ID: process.env.UMAMI_WEBSITE_ID
   }
 });

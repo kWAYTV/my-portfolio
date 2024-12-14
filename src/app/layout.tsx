@@ -1,12 +1,14 @@
 import './globals.css';
 
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import { ViewTransitions } from 'next-view-transitions';
 
 import { baseUrl } from '@/app/sitemap';
 import Footer from '@/components/core/layout/footer';
 import { Navbar } from '@/components/core/layout/nav';
 import { Providers } from '@/components/core/providers/providers';
+import { env } from '@/env';
 import { createMetadata } from '@/lib/metadata';
 
 const geistSans = localFont({
@@ -28,6 +30,14 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang='en' suppressHydrationWarning>
+        {env.NEXT_PUBLIC_ENABLE_UMAMI === 'true' && (
+          <Script
+            defer
+            src='https://metrics.kway.club/script.js'
+            data-website-id={env.UMAMI_WEBSITE_ID}
+            strategy='afterInteractive'
+          />
+        )}
         <body
           className={`${geistSans.variable} ${geistMono.variable} mx-4 mt-8 max-w-xl antialiased lg:mx-auto`}
         >
