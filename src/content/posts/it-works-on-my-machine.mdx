@@ -1,0 +1,73 @@
+---
+title: 'It Works on My Machine™'
+publishedAt: '2024-10-15'
+summary: 'The most frustrating phrase in software development'
+---
+
+# It Works on My Machine™
+
+Ah, the four words that strike fear into the hearts of developers everywhere.
+Let's explore this timeless phenomenon that's been haunting code reviews since
+the dawn of time.
+
+## The Natural Habitat
+
+Picture this: You've just pushed your code. CI is green. Tests pass. Life is
+good. Then:
+
+```bash
+QA: "The app crashes on startup"
+You: "That's impossible, works on my machine"
+QA: "Well, I'm looking at a black screen"
+You: "BUT IT WORKS ON MY MACHINE!"
+```
+
+## The Developer's Checklist
+
+- ✅ Works on my local
+- ✅ Works in dev environment
+- ✅ Works in my dreams
+- ❌ Works in production
+
+## The Investigation
+
+```typescript
+// The code you wrote
+const config = {
+  port: 3000,
+  dbPath: 'C:/Users/YourName/perfect/setup/db',
+  nodeModules: 'definitely/installed/correctly'
+};
+
+// What production actually sees
+const config = {
+  port: undefined,
+  dbPath: '404_not_found',
+  nodeModules: 'what_node_modules?'
+};
+```
+
+## The Classic Solutions
+
+1. "Have you tried clearing your cache?"
+2. "Let me push a quick hotfix" (narrator: it was not quick)
+3. "Must be a Docker issue"
+4. The nuclear option: "Works on my machine, let's ship my machine"
+
+## The Real Fix
+
+After 6 hours of debugging:
+
+```diff
+- const port = process.env.PORT;
++ const port = process.env.PORT || 3000;
+```
+
+## Conclusion
+
+Remember: "Works on my machine" is not a deployment strategy. Though if anyone's
+interested, I am working on a startup that ships developer machines to
+production environments. Currently seeking Series A funding.
+
+P.S. If this post doesn't display correctly, try clearing your cache. Works on
+my machine! 🤷‍♂️
